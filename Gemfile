@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap-sass'
+
+# for username and password security
+gem 'figaro'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'

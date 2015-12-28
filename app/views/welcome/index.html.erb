@@ -1,0 +1,25 @@
+<br>
+<div class="jumbotron">
+ <h1>ScreenMarket</h1>
+ <p></p>
+ <p>
+   <% unless current_user %>
+     <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
+     <% end %>
+ </p>
+</div>
+
+<div class="row">
+ <div class="col-md-4">
+   <h2>Learn a new skill</h2>
+   <p>online and face to face</p>
+ </div>
+ <div class="col-md-4">
+   <h2>Get professional financial advice</h2>
+   <p>without leaving your house</p>
+ </div>
+ <div class="col-md-4">
+   <h2>Save your trip to the nutritionist</h2>
+   <p>and go for that run instead</p>
+ </div>
+</div>
