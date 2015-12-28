@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# for uploading pictures and gifs
+gem 'carrierwave'
+gem 'mini_magick'
+
 gem 'bootstrap-sass'
 
 # for username and password security
