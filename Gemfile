@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# for creating and policing user roles 
+gem 'pundit'
+
 gem 'fog'
 
 # for seeding fake data

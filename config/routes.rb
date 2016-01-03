@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'appointments/create'
+
   root to: "welcome#index"
   get "welcome/about"
 
   devise_for :users
-  resources :users, only: [:update, :show]
+  resources :users, only: [:update, :show] do
+    resources :appointments
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

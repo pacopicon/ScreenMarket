@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  user_id: 
+  time_of: 2016-01-03 16:45:34
+  has_been_paid: false
+  amount: 1.5
+
+two:
+  name: MyString
+  user_id: 
+  time_of: 2016-01-03 16:45:34
+  has_been_paid: false
+  amount: 1.5
