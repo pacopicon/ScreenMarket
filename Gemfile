@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'fog'
+
+# for seeding fake data
+gem 'faker'
+
 # for uploading pictures and gifs
 gem 'carrierwave'
 gem 'mini_magick'
@@ -7,7 +12,7 @@ gem 'mini_magick'
 gem 'bootstrap-sass'
 
 # for username and password security
-gem 'figaro'
+gem 'figaro', '1.1.1'
 
 group :production do
   gem 'pg'
@@ -16,8 +21,9 @@ end
 
 group :development do
   gem 'sqlite3'
-  gem 'puma'
 end
+
+gem 'puma'
 
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
