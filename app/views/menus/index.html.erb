@@ -1,0 +1,13 @@
+<h1>Menu</h1>
+
+Search functionality goes here
+
+<% @menu.offices.each do |office| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to office.name, [@menu, office] %>
+      </h4>
+    </div>
+  </div>
+<% end %>

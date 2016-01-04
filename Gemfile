@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
-# for creating and policing user roles 
+# for processing credit cards
+gem 'stripe'
+
+# for creating and policing user roles
 gem 'pundit'
 
 gem 'fog'
@@ -24,6 +27,8 @@ end
 
 group :development do
   gem 'sqlite3'
+  gem 'binding_of_caller'
+  gem 'better_errors'
 end
 
 gem 'puma'

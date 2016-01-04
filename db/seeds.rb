@@ -1,11 +1,19 @@
 require 'faker'
 
-# Create Users
-10.times do
+# Create vendors
+
+
+
+30.times do
+  jobs = ["Certified Professional Accountant", "Certified Financial Advisor", "Nutritionist", "Nurse", "Podiatrist", "Tax Attorney", "Attorney-at-law", "Russian language instructor", "Arabic language instructor", "Spanish language instructor", "French language instructor", "AP Calculus Teacher", "Software engineer", "UX Analyst", "Web developer", "iOS developer"]
   user = User.new(
-    name:     Faker::Name.name,
-    email:    Faker::Internet.email,
-    password: Faker::Lorem.characters(10)
+    name:         Faker::Name.name,
+    email:        Faker::Internet.email,
+    password:     Faker::Lorem.characters(10),
+    avatar:       Faker::Avatar.image,
+    vendor:       true,
+    client:       false,
+    field_of_exp: jobs.sample
   )
   user.skip_confirmation!
   user.save!
@@ -20,13 +28,48 @@ users = User.all
 
  # The `save` method then saves this User to the database.
 
-# Create Items
-# 100.times do
-#   Item.create!(
-#   user: users.sample,
-#   name: Faker::Lorem.sentence
-#   )
-# end
+# Create menu
+1.times do
+  Menu.create!(
+  name: 'Menu'
+  )
+end
+
+#Create offices
+1.times do
+  Office.create!(
+  name: 'Health office',
+  menu: Menu.first
+  )
+end
+
+1.times do
+  Office.create!(
+  name: 'Education office',
+  menu: Menu.first
+  )
+end
+
+1.times do
+  Office.create!(
+  name: 'Finance office',
+  menu: Menu.first
+  )
+end
+
+1.times do
+  Office.create!(
+  name: 'Legal office',
+  menu: Menu.first
+  )
+end
+
+1.times do
+  Office.create!(
+  name: 'Tech office',
+  menu: Menu.first
+  )
+end
 
 user = User.first
 user.skip_reconfirmation!
@@ -38,4 +81,5 @@ user.update_attributes!(
 
 puts "Seed finished"
 puts "#{User.count} users created"
-# puts "#{Item.count} items created"
+puts "#{Menu.count} menus created"
+puts "#{Office.count} offices created"
