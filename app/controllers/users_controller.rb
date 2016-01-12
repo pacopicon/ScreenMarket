@@ -1,26 +1,24 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
-  after_create :update_office
-  # This method is only good for seeding.  In a live version of this app, all vendors would declare their office upon registration.
-  def update_office
-    if field_of_exp == "Certified Professional Accountant" || field_of_exp == "Certified Financial Advisor" || field_of_exp == "Tax Attorney"
-      office = "Finance office"
-    elsif field_of_exp == "Nurse" || field_of_exp == "Nutritionist" || field_of_exp == "Podiatrist"
-      office = "Health office"
-    elsif field_of_exp == "Attorney-at-law" || field_of_exp == "Tax Attorney"
-      office = "Legal office"
-    elsif field_of_exp == "Russian language instructor" || field_of_exp == "Arabic language instructor" || field_of_exp == "Spanish language instructor" || field_of_exp == "French language instructor" || field_of_exp == "AP Calculus Teacher"
-      office = "Education office"
-    else
-      office = "Tech office"
-    end
-    update_attribute(:office, office)
+  def index
+    @users = User.all
   end
 
   def show
-    @user = User.find(params[:id])
-    @appointments = @user.appointments
+    @user_on_page = User.find(params[:id])
+    @visiting_user = current_user
+    @customer_appointments = @user_on_page.customer_appointments
+    @vendor_appointments = @user_on_page.vendor_appointments
+    @appointment = Appointment.new
+    authorize @appointment
+  end
+
+  def new
+    @vendor = User.find(params[:user_id])
+    @customer = current_user
+    @appointment = Appointment.new
+    authorize @appointment
   end
 
   def update
@@ -36,6 +34,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :avatar, :vendor, :client)
+    params.require(:user).permit(:name, :avatar, :field_of_exp, :office_id, :role,)
   end
 end

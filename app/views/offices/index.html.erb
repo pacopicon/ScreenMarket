@@ -1,0 +1,16 @@
+<h1>Offices</h1>
+
+Search functionality goes here
+
+<div class='js-offices-count'>
+    <%= pluralize(@offices.count, 'offices') %>
+  </div>
+  <div class="js-offices">
+    <%= render partial: 'offices/office', collection: @offices %>
+  </div>
+  <% if policy(Office.new).create? %>
+    <div class="new-office">
+      <%= render partial: 'offices/form', locals: {office: @office} %>
+    </div>
+  <% end %>
+</div>

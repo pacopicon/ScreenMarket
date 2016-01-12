@@ -1,0 +1,6 @@
+<% if @office.valid? %>
+$('.js-offices').append("<%= escape_javascript(render(@office)) %>");
+$('.new-office').html("<%= escape_javascript(render partial: 'offices/form', locals: {office: @new_office}) %>");
+<% else %>
+$('.new-office').html("<%= escape_javascript(render partial: 'offices/form', locals: {office: @office}) %>");
+<% end %>

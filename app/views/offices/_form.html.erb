@@ -1,0 +1,6 @@
+<div class="js-offices">
+  <%= form_for Office.new, remote: true do |f| %>
+    <%= f.text_field :name, class: 'form-control', placeholder: "Enter name of Office" %>
+    <%= f.submit "Save", class: 'btn btn-success' %>
+  <% end %>
+</div>

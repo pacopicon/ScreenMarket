@@ -1,14 +1,17 @@
 class User < ActiveRecord::Base
-  has_many :appointments
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :customer_appointments, class_name: 'Appointment', foreign_key: :customer_id
+  has_many :vendor_appointments, class_name: 'Appointment', foreign_key: :vendor_id
+  has_many :vendors, through: :vendor_appointments, dependent: :destroy, foreign_key: :vendor_id
+  has_many :customers, through: :customer_appointments, dependent: :destroy, foreign_key: :customer_id
+  belongs_to :office
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   mount_uploader :avatar, AvatarUploader
 
   def admin?
-    role == 'admin'
+    role == 'vendor and customer and admin'
   end
 
   def guest?
@@ -16,11 +19,11 @@ class User < ActiveRecord::Base
   end
 
   def vendor?
-    role == 'vendor'
+    role == 'vendor' || role == 'vendor and customer'
   end
 
-  def client_paid?
-    role = 'client_paid'
+  def customer?
+    role == 'customer' || role == 'vendor and customer'
   end
 
 end

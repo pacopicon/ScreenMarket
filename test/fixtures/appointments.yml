@@ -2,14 +2,18 @@
 
 one:
   name: MyString
-  user_id: 
-  time_of: 2016-01-03 16:45:34
+  time_of: 2016-01-10 19:06:38
+  duration: 2016-01-10 19:06:38
   has_been_paid: false
-  amount: 1.5
+  amount_per_half_hour: 1.5
+  user_id: 
+  vendor_id: 
 
 two:
   name: MyString
-  user_id: 
-  time_of: 2016-01-03 16:45:34
+  time_of: 2016-01-10 19:06:38
+  duration: 2016-01-10 19:06:38
   has_been_paid: false
-  amount: 1.5
+  amount_per_half_hour: 1.5
+  user_id: 
+  vendor_id: 

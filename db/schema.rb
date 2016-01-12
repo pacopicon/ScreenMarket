@@ -11,34 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103233718) do
+ActiveRecord::Schema.define(version: 20160111021753) do
 
   create_table "appointments", force: :cascade do |t|
     t.string   "name"
-    t.integer  "user_id"
     t.datetime "time_of"
+    t.time     "duration"
     t.boolean  "has_been_paid"
-    t.float    "amount"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.float    "amount_per_half_hour"
+    t.integer  "customer_id"
+    t.integer  "vendor_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  add_index "appointments", ["user_id"], name: "index_appointments_on_user_id"
-
-  create_table "menus", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "appointments", ["customer_id"], name: "index_appointments_on_customer_id"
+  add_index "appointments", ["vendor_id"], name: "index_appointments_on_vendor_id"
 
   create_table "offices", force: :cascade do |t|
     t.string   "name"
-    t.integer  "menu_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "offices", ["menu_id"], name: "index_offices_on_menu_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -59,11 +53,9 @@ ActiveRecord::Schema.define(version: 20160103233718) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "avatar"
-    t.boolean  "vendor"
-    t.boolean  "client"
-    t.boolean  "has_paid"
-    t.string   "office"
     t.string   "field_of_exp"
+    t.integer  "office_id"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

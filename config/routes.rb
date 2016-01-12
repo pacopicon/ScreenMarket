@@ -1,20 +1,16 @@
 Rails.application.routes.draw do
-
-  get 'offices/create'
-
-  get 'menus/create'
+  devise_for :users
 
   root to: "welcome#index"
   get "welcome/about"
 
-  devise_for :users
-  resources :users, only: [:update, :show] do
+
+  resources :users, only: [:show, :update, :index] do
     resources :appointments
   end
 
-  resources :menus, only: [:index] do
-    resources :offices, only: [:show]
-  end
+  resources :offices
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

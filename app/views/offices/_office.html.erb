@@ -1,0 +1,11 @@
+<%= content_tag :div, class: 'media', id: "office-#{office.id}" do %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to office.name, office %><% if policy(office).destroy? %>
+          <%= link_to "", office_path(office), class: 'glyphicon glyphicon-remove', method: :delete, remote: true %>
+        <% end %>
+      </h4>
+    </div>
+  </div>
+<% end %>

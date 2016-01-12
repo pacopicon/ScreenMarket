@@ -1,0 +1,5 @@
+<% if @office.destroyed? %>
+$('#office-' +<%= @office.id %>).fadeOut('slow');
+<% else %>
+$('#office-' +<%= @office.id %>).prepend("<div class='alert-danger'><%= flash[:error] %></div>");
+<% end %>

@@ -3,7 +3,7 @@
   <div class="media">
     <div class="media-body">
       <h4 class="media-heading">
-        <%= link_to "#{user.name}, #{user.field_of_exp}", user %>
+        <%= render partial: 'users/user', collection: @users %>
       </h4>
     </div>
   </div>

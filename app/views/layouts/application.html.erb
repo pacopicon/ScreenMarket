@@ -12,8 +12,8 @@
     <ul class="nav nav-tabs">
       <li><%= link_to "Home", root_path %></li>
       <li><%= link_to "About", welcome_about_path %></li>
-      <li><% if current_user %><%= link_to (current_user.name || current_user.email)+"'s profile", @user %><% end %></li>
-      <li><%= link_to "Menu", menus_path %></li>
+      <li><%= link_to "Offices", offices_path %></li>
+      <li><% if current_user %><%= link_to (current_user.name || current_user.email)+"'s profile", current_user %><% end %></li>
 
       <div class="pull-right user-info">
         <% if current_user %>
@@ -23,12 +23,9 @@
        <%= link_to "Sign In", new_user_session_path %> or
        <%= link_to "Sign Up", new_user_registration_path %>
        <% end %>
-      </div>
-    </ul>
-<%= yield %>
+    </div>
+  </ul>
+  <%= yield %>
 </div>
-
-
-
 </body>
 </html>

@@ -1,18 +1,28 @@
 <div class="user">
-  <h1>Appointments by <%= @user.name %></h1>
-  <div class="row">
-    <div class="tabbable tabs-left">
-     <ul class="nav nav-tabs">
-       <li class="active"><a href="#posts" data-toggle="tab">Posts</a></li>
-       <li><a href="#comments" data-toggle="tab">Comments</a></li>
-     </ul>
-     <div class="tab-content">
-       <div class="tab-pane" id="posts">
-       </div>
-       <div class="tab-pane active" id="comments">
-
-       </div>
-     </div>
-   </div>
+  <h1><%= @user_on_page.name %>'s appointments:</h1>
+  <p>Customer appointments:</p>
+    <% @customer_appointments.each do |appointment| %>
+    <div class="media">
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= render partial: 'appointments/appointment', collection: @customer_appointments %>
+        </h4>
+      </div>
+    </div>
+  <% end %>
+  <p>Vendor appointments:</p>
+  <% @vendor_appointments.each do |appointment| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= render partial: 'appointments/appointment', collection: @vendor_appointments %>
+      </h4>
+    </div>
   </div>
+<% end %>
+  <% if @user_on_page.role == "vendor and customer and admin" || @user_on_page.role == "vendor" || @user_on_page.role == "vendor and customer"%>
+
+
+  <%= link_to "Create new appointment", new_user_appointment_path(@user_on_page, @visiting_user), class: 'btn btn-success' %>
+  <%end %>
 </div>

@@ -39,63 +39,44 @@
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control', placeholder: "Enter name", autofocus: true %>
       </div>
-      <% if current_user.avatar? %>
-         <div class="form-group">
-           <p>Current avatar</p>
-           <%= image_tag( current_user.avatar.profile.url ) %>
-         </div>
-       <% end %>
-       <div class="form-group">
-         <%= f.label :avatar %>
-         <%= f.file_field :avatar %>
-         <%= f.hidden_field :avatar_cache %>
-       </div>
-       <div class="form-group">
-         <%= f.label :vendor %>
-         <%= f.check_box :vendor %>
-         <p class="help-block">Click here if you intend on providing services through ScreenMarket</p>
-       </div>
-       <div class="form-group">
-         <%= f.label :client %>
-         <%= f.check_box :client %>
-         <p class="help-block">Click here if you intend on utilizing services provided through ScreenMarket</p>
-       </div>
       <div class="form-group">
-        <%= f.submit "Update", class: 'btn btn-success' %>
+        <%= f.label :field_of_expertise  %>
+        <%= f.text_field :field_of_exp, class: 'form-control', placeholder: "Enter your occupation, position or expertise", autofocus: true %>
       </div>
-    <% end %>
-
-    <h3>Upgrade to Premium account</h3>
-    <%= form_for(current_user) do |f| %>
       <div class="form-group">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: 'form-control', placeholder: "Enter name", autofocus: true %>
+        <%= f.label :office %>
+        <%= f.collection_select :office_id, Office.all, :id, :name %>
+        <i>(Offices help categorize the type of services that clients might seek.  Choose the office that best matches your expertise)</i>
       </div>
       <% if current_user.avatar? %>
-         <div class="form-group">
-           <p>Current avatar</p>
-           <%= image_tag( current_user.avatar.profile.url ) %>
-         </div>
-       <% end %>
-       <div class="form-group">
-         <%= f.label :avatar %>
-         <%= f.file_field :avatar %>
-         <%= f.hidden_field :avatar_cache %>
-       </div>
-       <div class="form-group">
-         <%= f.label :vendor %>
-         <%= f.check_box :vendor %>
-         <p class="help-block">Click here if you intend on providing services through ScreenMarket</p>
-       </div>
-       <div class="form-group">
-         <%= f.label :client %>
-         <%= f.check_box :client %>
-         <p class="help-block">Click here if you intend on utilizing services provided through ScreenMarket</p>
-       </div>
-      <div class="form-group">
+        <div class="form-group">
+          <p>Current avatar</p>
+          <%= image_tag( current_user.avatar.profile.url ) %>
+        </div>
+      <% end %>
+        <div class="form-group">
+          <%= f.label :avatar %>
+          <%= f.file_field :avatar %>
+          <%= f.hidden_field :avatar_cache %>
+        </div>
+        <div class="form-group">How will you be using ScreenMarket?
+          <div class="radio">
+            <%= f.radio_button :role, "guest" %> as a guest
+          </div>
+          <div class="radio">
+            <%= f.radio_button :role, "customer" %> as a customer
+          </div>
+          <div class="radio">
+            <%= f.radio_button :role, "vendor" %> as a vendor
+          </div>
+          <div class="radio">
+            <%= f.radio_button :role, "vendor and customer" %> as a vendor and customer
+          </div>
+        </div>
+        <div class="form-group">
         <%= f.submit "Update", class: 'btn btn-success' %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
 
     <h3>Cancel my account</h3>
     <div class="form-group">
