@@ -1,0 +1,13 @@
+<%= content_tag :div, class: 'media', id: "appointment-#{appointment.id}" do %>
+
+<ul>
+  <li>Appointment vendor: <%= appointment.vendor.name %></li>
+  <li>Appointment customer: <%= appointment.customer.name %></li>
+  <li>Appointment created at: <%= appointment.created_at.strftime('%A, %B %-d, at %I:%M%p') %></li>
+  <li>Date <%="&"%> time of appt: <%= appointment.time_of.strftime('%A, %B %-d, at %I:%M%p')%></li>
+  <li>Length of Appointment: <%= appointment.duration.strftime("%H hours and %M minutes") %></li>
+  <li><%= link_to "Delete appointment", [appointment.customer, appointment], method: :delete, class: 'btn btn-danger', remote: true %></li>
+</ul>
+
+
+<% end %>

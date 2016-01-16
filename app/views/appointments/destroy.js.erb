@@ -1,0 +1,6 @@
+<% if @appointment.destroyed? %>
+$('#appointment-' +<%= @appointment.id %>).fadeOut('slow');
+$('.js-appointments-count').html("<%= pluralize(@appointment.customer.customer_appointments.count, ' appointments') %>"<br>"<%= pluralize(@appointment.vendor.vendor_appointments.count, ' appointments') %>");
+<% else %>
+$('#appointment-' +<%= @appointment.id %>).prepend("<div class='alert-danger'><%= flash[:error] %></div>");
+<% end %>

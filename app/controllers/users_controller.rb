@@ -10,15 +10,7 @@ class UsersController < ApplicationController
     @visiting_user = current_user
     @customer_appointments = @user_on_page.customer_appointments
     @vendor_appointments = @user_on_page.vendor_appointments
-    @appointment = Appointment.new
-    authorize @appointment
-  end
-
-  def new
-    @vendor = User.find(params[:user_id])
-    @customer = current_user
-    @appointment = Appointment.new
-    authorize @appointment
+    @appointments = @customer_appointments + @vendor_appointments
   end
 
   def update
@@ -32,6 +24,14 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def at_least_one_or_empty(instance_var)
+    if instance_var.nil?
+      instance_var.none
+    else
+      instance_var.find(params[:id])
+    end
+  end
 
   def user_params
     params.require(:user).permit(:name, :avatar, :field_of_exp, :office_id, :role,)

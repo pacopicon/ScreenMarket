@@ -1,28 +1,15 @@
 <div class="user">
   <h1><%= @user_on_page.name %>'s appointments:</h1>
-  <p>Customer appointments:</p>
-    <% @customer_appointments.each do |appointment| %>
-    <div class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-          <%= render partial: 'appointments/appointment', collection: @customer_appointments %>
-        </h4>
-      </div>
-    </div>
-  <% end %>
-  <p>Vendor appointments:</p>
-  <% @vendor_appointments.each do |appointment| %>
-  <div class="media">
-    <div class="media-body">
-      <h4 class="media-heading">
-        <%= render partial: 'appointments/appointment', collection: @vendor_appointments %>
-      </h4>
-    </div>
+  <div class='js-appointments-count'>
+    <p>Customer appointments: <%= pluralize(@user_on_page.customer_appointments.count, 'appointment')%></p>
+    <p>Vendor appointments: <%= pluralize(@user_on_page.vendor_appointments.count, 'appointment')%></p>
   </div>
-<% end %>
-  <% if @user_on_page.role == "vendor and customer and admin" || @user_on_page.role == "vendor" || @user_on_page.role == "vendor and customer"%>
-
-
-  <%= link_to "Create new appointment", new_user_appointment_path(@user_on_page, @visiting_user), class: 'btn btn-success' %>
+    <div class="js-appointments">
+      <%= render partial: 'appointments/appointment', collection: @appointments %>
+    </div>
+  <% if @user_on_page != @visiting_user && @user_on_page.role == "vendor and customer and admin" || @user_on_page.role == "vendor" || @user_on_page.role == "vendor and customer" && @visiting_user.role == 'vendor and customer and admin' || @visiting_user.role == 'vendor and customer' || @visiting_user.role == 'customer' %>
+    <div class="new-appointment">
+      <%= render partial: 'appointments/form', locals: {visiting_user: @visiting_user, appointment: @appointment, user_on_page: @user_on_page}%>
+    </div>
   <%end %>
 </div>

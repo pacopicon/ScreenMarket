@@ -12,13 +12,13 @@ class AppointmentsController < ApplicationController
   end
 
 	def destroy
-   	@appointment = current_user.appointments.find(params[:id])
+   	@appointment = current_user.customer_appointments.find(params[:id])
     authorize @appointment
 
 		if @appointment.destroy
-  		flash[:notice] = "The appointment was obliterated!"
+  		flash[:notice] = "The appointment has been canceled."
   	else
-     	flash[:notice] = "Oops!, the appointment could not be deleted.  Try again!"
+     	flash[:notice] = "For some reason, the appointment could not be deleted.  Please try again."
 		end
 
 		respond_to do |format|
@@ -27,18 +27,18 @@ class AppointmentsController < ApplicationController
  		end
   end
 
-  def new
-    @vendor = User.find(params[:user_id])
-    @customer = current_user
-    @appointment = Appointment.new
-    authorize @appointment
-  end
+  # def new
+  #   @vendor = User.find(params[:user_id])
+  #   @customer = current_user
+  #   @appointment = Appointment.new
+  #   authorize @appointment
+  # end
 
   def create
- 		@user = current_user
-    @appointment = current_user.appointments.build(appointment_params)
+    @user_on_page = User.find(params[:user_id])
+    @visiting_user = current_user
+    @appointment = Appointment.new(appointment_params)
 		@new_appointment = Appointment.new
-    authorize @appointment
 
   	if @appointment.save
   		flash[:notice] = "Success! appointment was saved!"
@@ -53,6 +53,7 @@ class AppointmentsController < ApplicationController
   end
 
 	def update
+    @user = current_user
 		@appointment = Appointment.find(params[:id])
 		if @appointment.update_attributes(appointment_params)
 			flash[:notice] = “appointment has been updated.”
@@ -69,7 +70,7 @@ class AppointmentsController < ApplicationController
   private
 
 	def appointment_params
-		params.require(:appointment).permit(:name, :time_of, :amount, :has_been_paid)
+		params.require(:appointment).permit(:name, :time_of, :duration, :amount, :has_been_paid, :vendor_id, :customer_id)
  	end
 
     end

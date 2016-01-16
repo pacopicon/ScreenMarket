@@ -1,0 +1,7 @@
+<% if @appointment.valid? %>
+$('.js-appointments').append("<%= escape_javascript(render(@appointment)) %>");
+$('.new-appointment').html("<%= escape_javascript(render partial: 'appointments/form', locals: {visiting_user: @visiting_user, appointment: @new_appointment, user_on_page: @user_on_page}) %>");
+$('.js-appointments-count').html("<%= pluralize(@appointment.customer.customer_appointments.count, ' appointments') %>"<br>"<%= pluralize(@appointment.vendor.vendor_appointments.count, ' appointments') %>");
+<% else %>
+$('.new-appointment').html("<%= escape_javascript(render partial: 'appointments/form', locals: {visiting_user: @visiting_user, appointment: @appointment, user_on_page: @user_on_page}) %>");
+<% end %>
